@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-EmployeemanagerApplication<employeemanager>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "fr.adama.traore.employeemanager.EmployeemanagerApplication",
+            "projectName": "employeemanager",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
