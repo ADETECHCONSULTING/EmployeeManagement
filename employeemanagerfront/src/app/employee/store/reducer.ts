@@ -1,6 +1,9 @@
 import { createReducer, on } from "@ngrx/store";
 import { EmployeeState } from "./EmployeeState.interface";
-import { addEmployeeAction, addEmployeeFailureAction, addEmployeeSuccessAction, deleteEmployeeAction, deleteEmployeeFailureAction, deleteEmployeeSuccessAction, getEmployeesAction, getEmployeesFailureAction, getEmployeesSuccessAction, updateEmployeeAction, updateEmployeeFailureAction, updateEmployeeSuccessAction } from "./actions";
+import { addEmployeeAction, addEmployeeFailureAction, addEmployeeSuccessAction, deleteEmployeeAction, deleteEmployeeFailureAction, deleteEmployeeSuccessAction, getEmployeesAction, getEmployeesFailureAction, getEmployeesSuccessAction, searchEmployeesAction, updateEmployeeAction, updateEmployeeFailureAction, updateEmployeeSuccessAction } from "./actions";
+import { Employee } from "src/app/employee";
+
+let employeeAllData: Employee[] = [];
 
 const initialState: EmployeeState = {
     employees: [],
@@ -14,11 +17,15 @@ export const employeeReducer = createReducer(
         ...state,
         isLoading: true
     })),
-    on(getEmployeesSuccessAction, (state, action): EmployeeState => ({
-        ...state,
-        isLoading: false,
-        employees: action.employees
-    })),
+    on(getEmployeesSuccessAction, (state, action): EmployeeState => {
+        employeeAllData = action.employees;
+
+        return ({
+            ...state,
+            isLoading: false,
+            employees: action.employees
+        })
+    }),
     on(getEmployeesFailureAction, (state, action): EmployeeState => ({
         ...state,
         isLoading: false,
@@ -64,6 +71,11 @@ export const employeeReducer = createReducer(
         ...state,
         isLoading: false,
         error: action.error
+    })),
+    on(searchEmployeesAction, (state, action): EmployeeState => ({
+        ...state,
+        isLoading: false,
+        employees: employeeAllData.filter(initialEmployee => initialEmployee.name != null && initialEmployee.name.toLowerCase().includes(action.search.toLowerCase()))
     }))
 )
 

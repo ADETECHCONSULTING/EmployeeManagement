@@ -60,3 +60,8 @@ export const deleteEmployeeFailureAction = createAction(
     ActionTypes.DELETE_EMPLOYEE_FAILURE,
     props<{error: HttpErrorResponse}>()
 )
+
+export const searchEmployeesAction = createAction(
+    ActionTypes.SEARCH_EMPLOYEES,
+    props<{search: string}>()
+)

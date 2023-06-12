@@ -4,7 +4,7 @@ import { Employee } from '../employee';
 import { EmployeeService } from '../employee.service';
 import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
-import { addEmployeeAction, deleteEmployeeAction, getEmployeesAction, updateEmployeeAction } from './store/actions';
+import { addEmployeeAction, deleteEmployeeAction, getEmployeesAction, searchEmployeesAction, updateEmployeeAction } from './store/actions';
 import { employeeSelector } from './store/selector';
 
 @Component({
@@ -52,18 +52,20 @@ export class EmployeeComponent {
     button.click();
   }
 
-  searchEmployees(key: string): void {}
+  searchEmployees(key: string): void {
+    this.store.dispatch(searchEmployeesAction({search: key}));
+  }
     
   onAddEmployee(addForm : any): void {
     this.store.dispatch(addEmployeeAction({employee: addForm.value}));
   }
 
   onUpdateEmployee(employee: Employee): void {
-    this.store.dispatch(updateEmployeeAction({employee}));
+    this.store.dispatch(updateEmployeeAction({employee: employee}));
   }
 
   onDeleteEmployee(employeeId: number | undefined): void {
     if (!employeeId) return;
-    this.store.dispatch(deleteEmployeeAction({employeeId}));
+    this.store.dispatch(deleteEmployeeAction({employeeId: employeeId}));
   }
 }

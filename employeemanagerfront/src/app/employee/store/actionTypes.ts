@@ -14,4 +14,6 @@ export enum ActionTypes {
     DELETE_EMPLOYEE = '[Employee] Delete Employee',
     DELETE_EMPLOYEE_SUCCESS = '[Employee] Delete Employee Success',
     DELETE_EMPLOYEE_FAILURE = '[Employee] Delete Employee Failure',
+
+    SEARCH_EMPLOYEES = '[Employee] Search Employees'
 }
